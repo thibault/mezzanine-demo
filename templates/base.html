@@ -47,6 +47,13 @@
 </head>
 <body id="{% block body_id %}body{% endblock %}">
 
+<div class="container top-container">
+    <a href="#">Menu</a> | <a href="#">Contenu</a>
+    <div class="search-form pull-right">
+        {% search_form %}
+    </div>
+</div>
+
 <div class="container">
 <div class="navbar">
 <div class="navbar-inner">
@@ -57,7 +64,7 @@
     </a>
     {% if settings.SITE_TITLE %}<a class="brand" href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
     <div class="nav-collapse">
-        {% search_form "all" %}
+    {% page_menu "pages/menus/dropdown.html" %}
     </div>
 </div>
 </div>
