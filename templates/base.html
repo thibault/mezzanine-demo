@@ -72,6 +72,12 @@
 
 <div class="container">
 
+<ul class="breadcrumb">
+{% spaceless %}
+{% block breadcrumb_menu %}{% page_menu "pages/menus/breadcrumb.html" %}{% endblock %}
+{% endspaceless %}
+</ul>
+
 {% nevercache %}
 {% for message in messages %}
 <div class="alert alert-{{ message.tags }}" data-alert="alert">
@@ -83,38 +89,20 @@
 
 <h1>{% block title %}{% endblock %}</h1>
 
-<ul class="breadcrumb">
-{% spaceless %}
-{% block breadcrumb_menu %}{% page_menu "pages/menus/breadcrumb.html" %}{% endblock %}
-{% endspaceless %}
-</ul>
 
 </div>
 
 <div class="container">
 <div class="row">
 
-<div class="span3 left">
-    {% block left_panel %}
-    <div class="panel tree">{% page_menu "pages/menus/tree.html" %}</div>
-    {% endblock %}
-</div>
-
-<div class="span6 middle">
+<div class="span9 middle">
     {% block main %}{% endblock %}
 </div>
 
 <div class="span3 right">
-    {% nevercache %}
-    {% include "includes/user_panel.html" %}
-    {% endnevercache %}
-    <div class="panel">
-    {% block right_panel %}
-    {% ifinstalled mezzanine.twitter %}
-    {% include "twitter/tweets.html" %}
-    {% endifinstalled %}
+    {% block sidebar %}
+    <div class="panel tree">{% page_menu "pages/menus/tree.html" %}</div>
     {% endblock %}
-    </div>
 </div>
 
 </div>
