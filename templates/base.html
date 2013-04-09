@@ -72,11 +72,13 @@
 
 <div class="container">
 
+{% block breadcrumb %}
 <ul class="breadcrumb">
 {% spaceless %}
 {% block breadcrumb_menu %}{% page_menu "pages/menus/breadcrumb.html" %}{% endblock %}
 {% endspaceless %}
 </ul>
+{% endblock %}
 
 {% nevercache %}
 {% for message in messages %}
