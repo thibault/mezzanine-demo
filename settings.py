@@ -236,6 +236,7 @@ INSTALLED_APPS = (
     "mezzanine.pages",
     "mezzanine.galleries",
     "mezzanine.accounts",
+    "mezzanine_events",
     #"mezzanine.mobile",
 )
 

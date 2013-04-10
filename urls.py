@@ -66,6 +66,7 @@ urlpatterns = patterns("",
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
     ("^", include("mezzanine.urls")),
+    ("^", include("mezzanine_events.urls")),
 
     # MOUNTING MEZZANINE UNDER A PREFIX
     # ---------------------------------
