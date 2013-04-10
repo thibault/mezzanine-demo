@@ -1,11 +1,6 @@
-from cStringIO import StringIO
-import os
 from string import punctuation
 from urllib import unquote
-from zipfile import ZipFile
 
-from django.core.files.base import ContentFile
-from django.core.files.storage import default_storage
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -20,22 +15,17 @@ from mezzanine.utils.models import upload_to
 # Set the directory where files are uploaded to,
 # either MEDIA_ROOT + 'galleries', or filebrowser's upload
 # directory if being used.
-GALLERIES_UPLOAD_DIR = "galleries"
+UPLOAD_DIR = "galleries"
 if settings.PACKAGE_NAME_FILEBROWSER in settings.INSTALLED_APPS:
     fb_settings = "%s.settings" % settings.PACKAGE_NAME_FILEBROWSER
     try:
-        GALLERIES_UPLOAD_DIR = import_dotted_path(fb_settings).DIRECTORY
+        UPLOAD_DIR = import_dotted_path(fb_settings).DIRECTORY
     except ImportError:
         pass
 
 
 class MediaLibrary(Page, RichText):
     """Page bucket for media files."""
-
-    #zip_import = models.FileField(verbose_name=_("Zip import"), blank=True,
-    #    upload_to=upload_to("galleries.Gallery.zip_import", "galleries"),
-    #    help_text=_("Upload a zip file containing images, and "
-    #                "they'll be imported into this gallery."))
 
     class Meta:
         verbose_name = _("Media Library")
