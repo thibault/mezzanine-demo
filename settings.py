@@ -218,6 +218,10 @@ TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
 # APPLICATIONS #
 ################
 
+PROJECT_APPS = (
+    "mezzanine_media_library",
+)
+
 INSTALLED_APPS = (
     "django.contrib.admin",
     "django.contrib.auth",
@@ -238,7 +242,7 @@ INSTALLED_APPS = (
     "mezzanine.accounts",
     "mezzanine_events",
     #"mezzanine.mobile",
-)
+) + PROJECT_APPS
 
 # List of processors used by RequestContext to populate the context.
 # Each one should be a callable that takes the request object as its
