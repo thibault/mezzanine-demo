@@ -10,10 +10,6 @@ class MediaFileInline(TabularDynamicInlineAdmin):
 
 
 class MediaLibraryAdmin(PageAdmin):
-
-    class Media:
-        css = {"all": ("mezzanine/css/admin/gallery.css",)}
-
     inlines = (MediaFileInline,)
 
 
