@@ -9,8 +9,10 @@
 {{ page.medialibrary.content|richtext_filter|safe }}
 {% endeditable %}
 
+{% block medialibrary %}
 {% with page.medialibrary.files.all as files %}
 {% for file in files %}
+{% block mediafile %}
 <div class="media" id="media-file-{{ file.id }}">
     <a class="pull-left" href="{{ MEDIA_URL }}{{ file.file }}">
         {% if file.file.filetype == 'Image' %}
@@ -26,7 +28,8 @@
         <p>{{ file.description }}</strong>
     </div>
 </div>
+{% endblock %}
 {% endfor %}
 {% endwith %}
 {% endblock %}
-
+{% endblock %}
