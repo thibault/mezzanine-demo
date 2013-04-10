@@ -12,18 +12,6 @@ from mezzanine.utils.importing import import_dotted_path
 from mezzanine.utils.models import upload_to
 
 
-# Set the directory where files are uploaded to,
-# either MEDIA_ROOT + 'galleries', or filebrowser's upload
-# directory if being used.
-UPLOAD_DIR = "galleries"
-if settings.PACKAGE_NAME_FILEBROWSER in settings.INSTALLED_APPS:
-    fb_settings = "%s.settings" % settings.PACKAGE_NAME_FILEBROWSER
-    try:
-        UPLOAD_DIR = import_dotted_path(fb_settings).DIRECTORY
-    except ImportError:
-        pass
-
-
 class MediaLibrary(Page, RichText):
     """Page bucket for media files."""
 
