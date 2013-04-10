@@ -13,7 +13,11 @@
 {% for file in files %}
 <div class="media" id="media-file-{{ file.id }}">
     <a class="pull-left" href="{{ MEDIA_URL }}{{ file.file }}">
+        {% if file.file.filetype == 'Image' %}
+            <img class="media-object" src="{{ MEDIA_URL }}{% thumbnail file.file 64 64 %}">
+        {% else %}
          <img class="media-object" src="http://www.placekitten.com/64/64" />
+        {% endif %}
     </a>
     <div class="media-body">
         <strong><a href="{{ MEDIA_URL }}{{ file.file }}">
