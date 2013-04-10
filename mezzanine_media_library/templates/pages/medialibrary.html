@@ -2,13 +2,6 @@
 
 {% load mezzanine_tags staticfiles %}
 
-{% block extra_js %}
-{{ block.super }}
-<script src="{% static "mezzanine/js/jquery.tools.toolbox.expose.js" %}"></script>
-<script src="{% static "mezzanine/js/jquery.tools.overlay.js" %}"></script>
-<script src="{% static "mezzanine/js/gallery.js" %}"></script>
-{% endblock %}
-
 {% block main %}
 {{ block.super }}
 
@@ -23,7 +16,9 @@
          <img class="media-object" src="http://www.placekitten.com/64/64" />
     </a>
     <div class="media-body">
-        <strong><a href="{{ MEDIA_URL }}{{ file.file }}">{{ file.file.filename }}</a></strong>
+        <strong><a href="{{ MEDIA_URL }}{{ file.file }}">
+            {{ file.title|default:file.file.filename }}
+        </a></strong>
         <p>{{ file.description }}</strong>
     </div>
 </div>

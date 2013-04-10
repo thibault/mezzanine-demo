@@ -48,6 +48,7 @@ class MediaFile(Orderable):
     library = models.ForeignKey("MediaLibrary", related_name="files")
     file = FileField(_("File"), max_length=200,
             upload_to=upload_to("galleries.GalleryImage.file", "galleries"))
+    title = models.CharField(_("Title"), max_length=50, blank=True)
     description = models.CharField(_("Description"), max_length=1000,
                                    blank=True)
 
