@@ -16,7 +16,7 @@
         {% if file.file.filetype == 'Image' %}
             <img class="media-object" src="{{ MEDIA_URL }}{% thumbnail file.file 64 64 %}">
         {% else %}
-         <img class="media-object" src="http://www.placekitten.com/64/64" />
+            <img class="media-object" src="{{ STATIC_URL }}img/file_icon.png" />
         {% endif %}
     </a>
     <div class="media-body">
