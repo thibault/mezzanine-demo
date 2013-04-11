@@ -219,7 +219,7 @@ TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
 ################
 
 PROJECT_APPS = (
-    "mezzanine_media_library",
+    "mezzanine_file_collections",
 )
 
 INSTALLED_APPS = (
