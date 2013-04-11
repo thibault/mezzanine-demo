@@ -47,38 +47,28 @@
 </head>
 <body id="{% block body_id %}body{% endblock %}">
 
-<div class="container top-container">
-    <a href="#">Menu</a> | <a href="#">Contenu</a>
-    <div class="search-form pull-right">
-        {% search_form %}
-    </div>
-</div>
-
-<div class="container">
 <div class="navbar">
 <div class="navbar-inner">
+<div class="container">
     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </a>
+
     {% if settings.SITE_TITLE %}<a class="brand" href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
+
+
     <div class="nav-collapse">
-    {% page_menu "pages/menus/dropdown.html" %}
+        {% search_form %}
+        {% page_menu "pages/menus/dropdown.html" %}
     </div>
 </div>
 </div>
 </div>
 
-<div class="container">
 
-{% block breadcrumb %}
-<ul class="breadcrumb">
-{% spaceless %}
-{% block breadcrumb_menu %}{% page_menu "pages/menus/breadcrumb.html" %}{% endblock %}
-{% endspaceless %}
-</ul>
-{% endblock %}
+<div class="container">
 
 {% nevercache %}
 {% for message in messages %}
@@ -90,6 +80,14 @@
 
 
 <h1>{% block title %}{% endblock %}</h1>
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+{% spaceless %}
+{% block breadcrumb_menu %}{% page_menu "pages/menus/breadcrumb.html" %}{% endblock %}
+{% endspaceless %}
+</ul>
+{% endblock %}
 
 
 </div>
