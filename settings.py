@@ -243,6 +243,7 @@ INSTALLED_APPS = (
     "mezzanine.accounts",
     "mezzanine_events",
     #"mezzanine.mobile",
+    "leaflet",
 ) + PROJECT_APPS
 
 # List of processors used by RequestContext to populate the context.
@@ -302,6 +303,13 @@ OPTIONAL_APPS = (
 )
 
 DEBUG_TOOLBAR_CONFIG = {"INTERCEPT_REDIRECTS": False}
+
+LEAFLET_CONFIG = {
+    'TILES_URL': 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    'SPATIAL_EXTENT': (3.264, 43.91, 4.456, 43.305),
+    'DEFAULT_CENTER': (43.598501, 3.896847),
+    'DEFAULT_ZOOM': 12,
+}
 
 ###################
 # DEPLOY SETTINGS #

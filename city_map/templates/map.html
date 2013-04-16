@@ -1,5 +1,19 @@
 {% extends 'base.html' %}
+{% load leaflet_tags %}
+
+{% block extra_head %} {{ block.super }}
+    {% leaflet_js %}
+    {% leaflet_css %}
+{% endblock %}
 
 {% block main %}
-toto
+    {% leaflet_map "citymap" %}
+{% endblock %}
+
+{% block extra_js %} {{ block.super }}
+<script type="text/javascript">
+    function citymapInit(map, bounds) {
+        L.marker([43.598503, 3.896847]).addTo(map).bindPopup("<span>L'hôtel de ville</span>");
+    }
+</script>
 {% endblock %}
