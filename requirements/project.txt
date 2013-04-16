@@ -6,6 +6,7 @@ argparse==1.2.1
 bleach==1.2.1
 django-annoying==0.7.7
 django-debug-toolbar==0.9.4
+django-leaflet==0.5.1
 filebrowser-safe==0.2.25
 geopy==0.95.1
 grappelli-safe==0.2.19
