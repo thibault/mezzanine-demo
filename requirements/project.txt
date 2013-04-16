@@ -1,1 +1,16 @@
+Django==1.5.1
 Mezzanine==1.4.5
+Pillow==2.0.0
+South==0.7.6
+argparse==1.2.1
+bleach==1.2.1
+django-debug-toolbar==0.9.4
+filebrowser-safe==0.2.25
+geopy==0.95.1
+grappelli-safe==0.2.19
+html5lib==0.95
+icalendar==3.0.1b2
+mezzanine-events==0.1.1
+mezzanine-file-collections==1.0.1
+pytz==2013b
+wsgiref==0.1.2
