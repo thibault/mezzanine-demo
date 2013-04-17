@@ -42,7 +42,7 @@ function citymapInit(map, bounds) {
     var url;
     {% for poi in pois %}
         marker = L.marker([{{ poi.lat}}, {{ poi.lng }}]).addTo(map);
-        url = '{% url "point_of_interest" poi.id %}';
+        url = '{% url "point_of_interest" poi.slug %}';
         marker.bindPopup("<a href='" + url + "'>{{ poi.name }}</a>");
     {% endfor %}
 }

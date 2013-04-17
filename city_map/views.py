@@ -9,9 +9,9 @@ def map(request):
             'pois': pois,
     })
 
-def point_of_interest(request, id):
+def point_of_interest(request, slug):
     pois = PointOfInterest.objects.all()
-    selected_poi = get_object_or_404(PointOfInterest, id=id)
+    selected_poi = get_object_or_404(PointOfInterest, slug=slug)
     return render(request, 'map.html', {
             'pois': pois,
             'selected_poi': selected_poi,
