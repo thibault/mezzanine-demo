@@ -1,7 +1,8 @@
 var App = {
     Models: {},
     Collections: {},
-    Views: {}
+    Views: {},
+    Config: {}
 };
 
 App.Models.Marker = Backbone.Model.extend({
@@ -13,7 +14,9 @@ App.Models.Marker = Backbone.Model.extend({
 
 App.Collections.MarkerCollection = Backbone.Collection.extend({
     model: App.Models.Marker,
-    url: markerCollectionUrl
+    initialize: function() {
+        this.url = App.Config.markerCollectionUrl;
+    },
 });
 
 //MarkerView has no element
@@ -27,7 +30,7 @@ App.Views.MarkerView = Backbone.View.extend({
     render: function() {    
         //append marker to the map
         this.marker.addTo(this.map);
-        var url = mapUrl + this.model.get('slug');
+        var url = App.Config.mapUrl + this.model.get('slug');
         var popup = '<a href="' + url + '">' + this.model.get('name') + '</a>';
         this.marker.bindPopup(popup);
 

@@ -36,16 +36,17 @@
 {% endblock %}
 
 {% block extra_js %} {{ block.super }}
+<script src="{{ STATIC_URL }}js/underscore.js"></script>
+<script src="{{ STATIC_URL }}js/backbone.js"></script>
+<script src="{{ STATIC_URL }}js/map/app.js"></script>
 <script type="text/javascript">
+App.Config = {
+    markerCollectionUrl: "{% url 'markers_data' %}",
+    mapUrl: "{% url 'map' %}"
+};
 function citymapInit(map, bounds) {
     var mapView = new App.Views.MapView({ map: map });
 }
 
-var markerCollectionUrl = "{% url 'markers_data' %}";
-var mapUrl = "{% url 'map' %}";
 </script>
-
-<script src="{{ STATIC_URL }}js/underscore.js"></script>
-<script src="{{ STATIC_URL }}js/backbone.js"></script>
-<script src="{{ STATIC_URL }}js/map/app.js"></script>
 {% endblock %}
