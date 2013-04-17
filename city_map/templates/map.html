@@ -25,3 +25,13 @@
         {% endeditable %}
     </div>
 {% endblock %}
+
+{% block extra_js %} {{ block.super }}
+<script type="text/javascript">
+function citymapInit(map, bounds) {
+    {% for poi in pois %}
+        L.marker([{{ poi.lat}}, {{ poi.lng }}]).addTo(map).bindPopup("<span>{{ poi.name }}</span>");
+    {% endfor %}
+}
+</script>
+{% endblock %}
