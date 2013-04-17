@@ -2,8 +2,22 @@ var App = {
     Models: {},
     Collections: {},
     Views: {},
+    Routers: {},
     Config: {}
 };
+
+App.Routers.MapRouter = Backbone.Router.extend({
+    initialize: function(options) {
+        this.route('', 'map');
+        this.route(':slug/', 'pointOfInterest');
+    },
+    map: function() {
+        console.log('map');
+    },
+    pointOfInterest: function(slug) {
+        console.log('point !');
+    }
+});
 
 App.Models.Marker = Backbone.Model.extend({
     // name
@@ -25,15 +39,26 @@ App.Views.MarkerView = Backbone.View.extend({
     initialize: function(options) {
         this.map = options.map,
         this.marker = L.marker([this.model.get('lat'), this.model.get('lng')]);
+
+        // Create the marker popup
+        var popup = document.createElement('a');
+        popup.href = App.Config.mapUrl + this.model.get('slug') + '/';
+        popup.innerHTML = this.model.get('name');
+
+        // We have to bind the event here, because leaflets prevents
+        // the click event to buble outside the map element
+        var slug = this.model.get('slug');
+        popup.onclick = function(event) {
+            event.preventDefault();
+            Backbone.history.navigate(slug);
+        };
+        this.marker.bindPopup(popup);
     },
 
     render: function() {    
-        //append marker to the map
+        // All we have to do is add the marker to the map
+        // (Leaflet API)
         this.marker.addTo(this.map);
-        var url = App.Config.mapUrl + this.model.get('slug');
-        var popup = '<a href="' + url + '">' + this.model.get('name') + '</a>';
-        this.marker.bindPopup(popup);
-
         return this;
     }
 });
@@ -60,4 +85,9 @@ App.Views.MapView = Backbone.View.extend({
 });
 
 $(function() {
+    var mapRouter = new App.Routers.MapRouter();
+    Backbone.history.start({
+        pushState: true,
+        root: App.Config.mapUrl,
+    });
 });
