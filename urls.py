@@ -54,7 +54,7 @@ urlpatterns = patterns("",
 
     # url("^$", "mezzanine.blog.views.blog_post_list", name="home"),
 
-    url("^la-ville/cartographie/$", "city_map.views.map", name="city_map"),
+    ("^la-ville/cartographie/", include("city_map.urls")),
 
     # MEZZANINE'S URLS
     # ----------------
