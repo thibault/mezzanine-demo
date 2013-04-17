@@ -15,13 +15,21 @@
 
 
     <div class="row">
+
         <div class="span3" id="poi-data">
-            <strong>Cliquez sur un point pour voir les détails</strong>
+            {% if selected_poi %}
+                <strong>{{ selected_poi.name }}</strong>
+            {% else %}
+                <strong>Cliquez sur un point pour voir les détails</strong>
+            {% endif %}
         </div>
+
         <div class="span6"id="poi-details">
-            {% editable page.richtextpage.content %}
+            {% if selected_poi %}
+                {{ selected_poi.description|richtext_filter|safe }}
+            {% else %}
                 {{ page.richtextpage.content|richtext_filter|safe }}
-            {% endeditable %}
+            {% endif %}
         </div>
     </div>
 
@@ -30,8 +38,12 @@
 {% block extra_js %} {{ block.super }}
 <script type="text/javascript">
 function citymapInit(map, bounds) {
+    var marker;
+    var url;
     {% for poi in pois %}
-        L.marker([{{ poi.lat}}, {{ poi.lng }}]).addTo(map).bindPopup("<span>{{ poi.name }}</span>");
+        marker = L.marker([{{ poi.lat}}, {{ poi.lng }}]).addTo(map);
+        url = '{% url "point_of_interest" poi.id %}';
+        marker.bindPopup("<a href='" + url + "'>{{ poi.name }}</a>");
     {% endfor %}
 }
 </script>
