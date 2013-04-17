@@ -38,13 +38,13 @@
 {% block extra_js %} {{ block.super }}
 <script type="text/javascript">
 function citymapInit(map, bounds) {
-    var marker;
-    var url;
-    {% for poi in pois %}
-        marker = L.marker([{{ poi.lat}}, {{ poi.lng }}]).addTo(map);
-        url = '{% url "point_of_interest" poi.slug %}';
-        marker.bindPopup("<a href='" + url + "'>{{ poi.name }}</a>");
-    {% endfor %}
+    var mapView = new App.Views.MapView({ map: map });
 }
+
+var markerCollectionUrl = "{% url 'markers_data' %}";
 </script>
+
+<script src="{{ STATIC_URL }}js/underscore.js"></script>
+<script src="{{ STATIC_URL }}js/backbone.js"></script>
+<script src="{{ STATIC_URL }}js/map/app.js"></script>
 {% endblock %}
