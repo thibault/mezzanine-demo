@@ -9,21 +9,22 @@
 
 {% block main %}
 
-    <div class="row">
-        <div class="span6" id="map">
-            {% leaflet_map "citymap" %}
-        </div>
+    <div id="map">
+        {% leaflet_map "citymap" %}
+    </div>
 
+
+    <div class="row">
         <div class="span3" id="poi-data">
             <strong>Cliquez sur un point pour voir les détails</strong>
         </div>
+        <div class="span6"id="poi-details">
+            {% editable page.richtextpage.content %}
+                {{ page.richtextpage.content|richtext_filter|safe }}
+            {% endeditable %}
+        </div>
     </div>
 
-    <div id="poi-details">
-        {% editable page.richtextpage.content %}
-            {{ page.richtextpage.content|richtext_filter|safe }}
-        {% endeditable %}
-    </div>
 {% endblock %}
 
 {% block extra_js %} {{ block.super }}
