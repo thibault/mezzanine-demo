@@ -27,7 +27,9 @@ App.Views.MarkerView = Backbone.View.extend({
     render: function() {    
         //append marker to the map
         this.marker.addTo(this.map);
-        this.marker.bindPopup(this.model.get('name'));
+        var url = mapUrl + this.model.get('slug');
+        var popup = '<a href="' + url + '">' + this.model.get('name') + '</a>';
+        this.marker.bindPopup(popup);
 
         return this;
     }
