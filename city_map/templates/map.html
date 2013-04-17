@@ -1,5 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'pages/richtextpage.html' %}
 {% load leaflet_tags %}
+{% load mezzanine_tags %}
 
 {% block extra_head %} {{ block.super }}
     {% leaflet_js %}
@@ -7,13 +8,20 @@
 {% endblock %}
 
 {% block main %}
-    {% leaflet_map "citymap" %}
-{% endblock %}
 
-{% block extra_js %} {{ block.super }}
-<script type="text/javascript">
-    function citymapInit(map, bounds) {
-        L.marker([43.598503, 3.896847]).addTo(map).bindPopup("<span>L'hôtel de ville</span>");
-    }
-</script>
+    <div class="row">
+        <div class="span6" id="map">
+            {% leaflet_map "citymap" %}
+        </div>
+
+        <div class="span3" id="poi-data">
+            <strong>Cliquez sur un point pour voir les détails</strong>
+        </div>
+    </div>
+
+    <div id="poi-details">
+        {% editable page.richtextpage.content %}
+            {{ page.richtextpage.content|richtext_filter|safe }}
+        {% endeditable %}
+    </div>
 {% endblock %}
