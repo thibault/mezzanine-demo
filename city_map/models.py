@@ -3,10 +3,11 @@ from django.db import models
 
 
 class PointOfInterest(models.Model):
-    lat = models.FloatField(_('Latitude'))
-    lng = models.FloatField(_('Longitude'))
     name = models.CharField(_('name'), max_length=50)
     description = models.TextField(_('Description'), null=True, blank=True)
+    lat = models.FloatField(_('Latitude'))
+    lng = models.FloatField(_('Longitude'))
+    slug = models.SlugField(_('Slug'))
 
     class Meta:
         verbose_name = _('Point of interest')
