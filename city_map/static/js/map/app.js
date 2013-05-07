@@ -9,6 +9,7 @@ var App = {
         Backbone.history.start({
             pushState: true,
             root: App.Config.mapUrl,
+            silent: true,
         });
     }
 };
@@ -82,11 +83,18 @@ App.Views.MapView = Backbone.View.extend({
     }
 });
 
+App.Views.TitleView = Backbone.View.extend({
+    render: function() {
+        this.$el.html(this.model.get('name'));
+    }
+});
+
 App.Routers.MapRouter = Backbone.Router.extend({
     initialize: function(options) {
         this.route('', 'map');
         this.route(':slug/', 'pointOfInterest');
         this.mapView = new App.Views.MapView({ map: options.map });
+        this.titleView = new App.Views.TitleView({ el: $('h1') });
     },
     map: function() {
         // Display the basic map information
@@ -97,7 +105,9 @@ App.Routers.MapRouter = Backbone.Router.extend({
         console.log('Router: poi ' + slug);
 
         var marker = this.mapView.markers.getBySlug(slug);
-        // Find model from collection by slug
-        // Render model
+
+        // Render the title
+        this.titleView.model = marker;
+        this.titleView.render();
     }
 });
