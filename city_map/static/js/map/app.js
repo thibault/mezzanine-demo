@@ -84,9 +84,22 @@ App.Views.MapView = Backbone.View.extend({
 });
 
 App.Views.TitleView = Backbone.View.extend({
+    initialize: function() {
+        this.setElement($('h1'));
+    },
     render: function() {
         this.$el.html(this.model.get('name'));
     }
+});
+
+App.Views.SidebarView = Backbone.View.extend({
+    initialize: function() {
+        this.setElement($('#poi-sidebar'));
+        this.template = _.template($('#poi-sidebar-template').html());
+    },
+    render: function() {
+        this.$el.html(this.template(this.model.attributes));
+    },
 });
 
 App.Routers.MapRouter = Backbone.Router.extend({
@@ -94,7 +107,8 @@ App.Routers.MapRouter = Backbone.Router.extend({
         this.route('', 'map');
         this.route(':slug/', 'pointOfInterest');
         this.mapView = new App.Views.MapView({ map: options.map });
-        this.titleView = new App.Views.TitleView({ el: $('h1') });
+        this.titleView = new App.Views.TitleView();
+        this.sidebarView = new App.Views.SidebarView();
     },
     map: function() {
         // Display the basic map information
@@ -109,5 +123,9 @@ App.Routers.MapRouter = Backbone.Router.extend({
         // Render the title
         this.titleView.model = marker;
         this.titleView.render();
+
+        // Render the sidebar
+        this.sidebarView.model = marker;
+        this.sidebarView.render();
     }
 });

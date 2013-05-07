@@ -16,7 +16,7 @@
 
     <div id="map-data" class="row">
 
-        <div class="span3" id="poi-data">
+        <div class="span3" id="poi-sidebar">
             {% if selected_poi %}
                 <strong>{{ selected_poi.name }}</strong>
             {% else %}
@@ -24,7 +24,7 @@
             {% endif %}
         </div>
 
-        <div class="span6"id="poi-details">
+        <div class="span6"id="poi-main">
             {% if selected_poi %}
                 {{ selected_poi.description|richtext_filter|safe }}
             {% else %}
@@ -39,6 +39,14 @@
 <script src="{{ STATIC_URL }}js/underscore.js"></script>
 <script src="{{ STATIC_URL }}js/backbone.js"></script>
 <script src="{{ STATIC_URL }}js/map/app.js"></script>
+<script type="text/template" id="poi-sidebar-template">
+    <dl>
+        <dt>Lat:</dt>
+        <dd><%= lat %></dd>
+        <dt>Lng:</dt>
+        <dd><%= lng %></dd>
+    </dl>
+</script>
 <script type="text/javascript">
 App.Config = {
     markerCollectionUrl: "{% url 'markers_data' %}",
