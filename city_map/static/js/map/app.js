@@ -102,6 +102,15 @@ App.Views.SidebarView = Backbone.View.extend({
     },
 });
 
+App.Views.MainView = Backbone.View.extend({
+    initialize: function() {
+        this.setElement($('#poi-main'));
+    },
+    render: function() {
+        this.$el.html(this.model.get('description'));
+    },
+});
+
 App.Routers.MapRouter = Backbone.Router.extend({
     initialize: function(options) {
         this.route('', 'map');
@@ -109,6 +118,7 @@ App.Routers.MapRouter = Backbone.Router.extend({
         this.mapView = new App.Views.MapView({ map: options.map });
         this.titleView = new App.Views.TitleView();
         this.sidebarView = new App.Views.SidebarView();
+        this.mainView = new App.Views.MainView();
     },
     map: function() {
         // Display the basic map information
@@ -127,5 +137,9 @@ App.Routers.MapRouter = Backbone.Router.extend({
         // Render the sidebar
         this.sidebarView.model = marker;
         this.sidebarView.render();
+
+        // Render the main part
+        this.mainView.model = marker;
+        this.mainView.render();
     }
 });
