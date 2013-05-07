@@ -14,7 +14,7 @@
     </div>
 
 
-    <div class="row">
+    <div id="map-data" class="row">
 
         <div class="span3" id="poi-data">
             {% if selected_poi %}
@@ -45,7 +45,7 @@ App.Config = {
     mapUrl: "{% url 'map' %}"
 };
 function citymapInit(map, bounds) {
-    var mapView = new App.Views.MapView({ map: map });
+    App.start(map);
 }
 </script>
 {% endblock %}
