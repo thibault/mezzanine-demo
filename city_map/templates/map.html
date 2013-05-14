@@ -7,6 +7,10 @@
     {% leaflet_css %}
 {% endblock %}
 
+{% block title %}
+    {{ selected_poi.name|default_if_none:page.title }}
+{% endblock %}
+
 {% block main %}
 
     <div id="map">
@@ -17,7 +21,12 @@
 
         <div class="span3" id="poi-sidebar">
             {% if selected_poi %}
-                <strong>{{ selected_poi.name }}</strong>
+                <dl>
+                    <dt>Lat:</dt>
+                    <dd>{{ selected_poi.lat }}</dd>
+                    <dt>Lng:</dt>
+                    <dd>{{ selected_poi.lng }}</dd>
+                </dl>
             {% else %}
                 <strong>Cliquez sur un point pour voir les détails</strong>
             {% endif %}
@@ -25,9 +34,9 @@
 
         <div class="span6"id="poi-main">
             {% if selected_poi %}
-                {{ selected_poi.description|richtext_filter|safe }}
+                {{ selected_poi.description|safe }}
             {% else %}
-                {{ page.richtextpage.content|richtext_filter|safe }}
+                {{ page.richtextpage.content|safe }}
             {% endif %}
         </div>
     </div>
