@@ -8,6 +8,8 @@ django-annoying==0.7.7
 django-debug-toolbar==0.9.4
 django-leaflet==0.5.1
 filebrowser-safe==0.2.25
+## FIXME: could not find svn URL in dependency_links for this package:
+flup==1.0.3.dev-20110405
 geopy==0.95.1
 grappelli-safe==0.2.19
 html5lib==0.95
