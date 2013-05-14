@@ -8,7 +8,11 @@
 {% endblock %}
 
 {% block title %}
-    {{ selected_poi.name|default_if_none:page.title }}
+    {% if selected_poi %}
+        {{ selected_poi.name }}
+    {% else %}
+        {{ page.title }}
+    {% endif %}
 {% endblock %}
 
 {% block main %}
