@@ -1,6 +1,10 @@
 #!/usr/bin/python
 import os, sys
 
+venv_file = '/home/mezzanine/.virtualenvs/mezzanine/bin/activate_this.py'              
+if os.path.isfile(venv_file):                                                   
+    execfile(venv_file, dict(__file__=venv_file))
+
 _PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, _PROJECT_DIR)
 sys.path.insert(0, os.path.dirname(_PROJECT_DIR))
