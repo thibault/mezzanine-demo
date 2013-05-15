@@ -14,12 +14,7 @@ var App = {
     }
 };
 
-App.Models.Marker = Backbone.Model.extend({
-    // name
-    // description
-    // lat, lng
-    // url
-});
+App.Models.Marker = Backbone.Model.extend({});
 
 App.Collections.MarkerCollection = Backbone.Collection.extend({
     model: App.Models.Marker,
@@ -34,7 +29,6 @@ App.Collections.MarkerCollection = Backbone.Collection.extend({
 //MarkerView has no element
 App.Views.MarkerView = Backbone.View.extend({
 
-    id: "map-data",
     initialize: function(options) {
         this.map = options.map,
 
@@ -68,7 +62,6 @@ App.Views.MapView = Backbone.View.extend({
         this.markers = new App.Collections.MarkerCollection();
         this.listenTo(this.markers, "reset", this.render);
         this.markers.fetch({ reset: true });
-        this.markerViews = [];
     },
     render: function() {
         this.markers.each(this.addOne, this);
@@ -79,35 +72,23 @@ App.Views.MapView = Backbone.View.extend({
             model: marker,
             map: this.map
         });
-        this.markerViews.push(view);
+    },
+    getMarkerBySlug: function(slug) {
+        return this.markers.getBySlug(slug);
     }
-});
-
-App.Views.TitleView = Backbone.View.extend({
-    initialize: function() {
-        this.setElement($('h1'));
-    },
-    render: function() {
-        this.$el.html(this.model.get('name'));
-    }
-});
-
-App.Views.SidebarView = Backbone.View.extend({
-    initialize: function() {
-        this.setElement($('#poi-sidebar'));
-        this.template = _.template($('#poi-sidebar-template').html());
-    },
-    render: function() {
-        this.$el.html(this.template(this.model.attributes));
-    },
 });
 
 App.Views.MainView = Backbone.View.extend({
     initialize: function() {
-        this.setElement($('#poi-main'));
+        this.descriptionElement = $('#poi-main');
+        this.titleElement = $('h1');
+        this.sidebarElement = ('#poi-sidebar');
+        this.sidebarTemplate = _.template($('#poi-sidebar-template').html());
     },
     render: function() {
-        this.$el.html(this.model.get('description'));
+        this.descriptionElement.html(this.model.get('description'));
+        this.titleElement.html(this.model.get('name'));
+        this.sidebarElement.html(this.sidebarTemplate(this.model.attributes));
     },
 });
 
@@ -116,8 +97,6 @@ App.Routers.MapRouter = Backbone.Router.extend({
         this.route('', 'map');
         this.route(':slug/', 'pointOfInterest');
         this.mapView = new App.Views.MapView({ map: options.map });
-        this.titleView = new App.Views.TitleView();
-        this.sidebarView = new App.Views.SidebarView();
         this.mainView = new App.Views.MainView();
     },
     map: function() {
@@ -128,17 +107,9 @@ App.Routers.MapRouter = Backbone.Router.extend({
         // Display a single point of interest
         console.log('Router: poi ' + slug);
 
-        var marker = this.mapView.markers.getBySlug(slug);
+        var marker = this.mapView.getMarkerBySlug(slug);
 
-        // Render the title
-        this.titleView.model = marker;
-        this.titleView.render();
-
-        // Render the sidebar
-        this.sidebarView.model = marker;
-        this.sidebarView.render();
-
-        // Render the main part
+        // Render the marker data
         this.mainView.model = marker;
         this.mainView.render();
     }

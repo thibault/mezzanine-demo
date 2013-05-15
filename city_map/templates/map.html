@@ -51,14 +51,7 @@
 <script src="{{ STATIC_URL }}js/underscore.js"></script>
 <script src="{{ STATIC_URL }}js/backbone.js"></script>
 <script src="{{ STATIC_URL }}js/map/app.js"></script>
-<script type="text/template" id="poi-sidebar-template">
-    <dl>
-        <dt>Lat:</dt>
-        <dd><%= lat %></dd>
-        <dt>Lng:</dt>
-        <dd><%= lng %></dd>
-    </dl>
-</script>
+
 <script type="text/javascript">
 {# Pass parameters from python to js #}
 App.Config = {
@@ -68,5 +61,14 @@ App.Config = {
 function citymapInit(map, bounds) {
     App.start(map);
 }
+</script>
+
+<script type="text/template" id="poi-sidebar-template">
+    <dl>
+        <dt>Lat:</dt>
+        <dd><%= lat %></dd>
+        <dt>Lng:</dt>
+        <dd><%= lng %></dd>
+    </dl>
 </script>
 {% endblock %}
