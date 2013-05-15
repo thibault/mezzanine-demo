@@ -1,0 +1,31 @@
+body {
+    padding-top: 0;
+}
+.search-form .form {
+    margin-top: 0 !important;
+}
+.top-container {
+    margin-bottom: 1em;
+}
+.breadcrumb {
+    margin-top: 0;
+}
+img.img_left {
+    float: left;
+    margin-right: 1em;
+    margin-right: 1rem;
+    max-width: 50%;
+}
+.leaflet-container {
+}
+.leaflet-container img {
+    box-shadow: inherit;
+    -moz-box-shadow: inherit;
+    -webkit-box-shadow: inherit;
+}
+#map {
+    margin-bottom: 1em;
+}
+#poi-main h2 {
+    margin-top: 0;
+}
